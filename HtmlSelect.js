@@ -3,7 +3,10 @@
  *
  *
  * Plugin para jQuery Que permite la manipulación del componente Select de HTML
- * Version 1.0
+ * --Seleccionar un valor de acuerdo al value es pecificado
+ * --Eliminar una opción de la lista, especificando el value
+ * --Carga datos en el select en formatoJS es necesario que contengan el atributo value y text
+ * --Carga datos en el select los cuales seran obtenidos mediante una petición ajax
  *
  * @copyright  Copyright (c) 2012 Soy programador (http://soyprogramador.liz.mx)
  * @license    New BSD License
@@ -59,11 +62,27 @@
 		*	$.select.loadDataJson("idSelect", json);
 		*
 		*/
-		loadDataJson: function(idSelect, json, limpiar = true){
-			//De no indicar que se lipiara, entonces se agregara la opcion al final
-			if(limpiar === true){
-				$("#"+idSelect).html("");
-			}			
+		loadDataJson: function(idSelect, json){
+			$("#"+idSelect).html("");
+			for (var i=0, len = json.length; i<len ; i++) {
+					var entry = json[i];				
+					//console.warn(entry.);
+					$('#'+idSelect).append("<option value='"+entry.value+"'>"+entry.text+"</option>");  
+				}
+        },
+		/*
+		*	loadDataJson()
+		*	@param idSelect Id del select
+		*	@param json Obejto json en formato value, text
+		*	@param limpiar Por debault Antes de cargar los valores, elimina cualquier opcion del combo
+		*	
+		*	Carga los datos de un objeto Jsonen el combo.		
+		*
+		*	$.select.loadDataJson("idSelect", json);
+		*
+		*/
+		loadDataJson: function(idSelect, json){
+			$("#"+idSelect).html("");
 			for (var i=0, len = json.length; i<len ; i++) {
 					var entry = json[i];				
 					//console.warn(entry.);
@@ -82,11 +101,8 @@
 		*	$.select.loadDataJsonAjax("idSelect", url);
 		*
 		*/
-		loadDataJsonAjax: function(idSelect, url, limpiar = true){
-			//De no indicar que se lipiara, entonces se agregara la opcion al final
-			if(limpiar === true){
+		loadDataJsonAjax: function(idSelect, url){
 				$("#"+idSelect).html("");
-			}
 			$.ajax({
                 url:  url,
                 success: function(json) {
