@@ -1,79 +1,107 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Html-select by govaniso</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Html-select : Plugin para la Manipulación del componente HTML Select" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Html-select</title>
   </head>
+
   <body>
 
-      <header>
-        <h1>Html-select</h1>
-        <p>Plugin para la Manipulación del componente Select</p>
-      </header>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/govaniso/Html-select">View on GitHub</a>
 
-      <div id="banner">
-        <span id="logo"></span>
+          <h1 id="project_title">Html-select</h1>
+          <h2 id="project_tagline">Plugin para la Manipulación del componente HTML Select</h2>
 
-        <a href="https://github.com/govaniso/Html-select" class="button fork"><strong>View On GitHub</strong></a>
-        <div class="downloads">
-          <span>Downloads:</span>
-          <ul>
-            <li><a href="https://github.com/govaniso/Html-select/zipball/master" class="button">ZIP</a></li>
-            <li><a href="https://github.com/govaniso/Html-select/tarball/master" class="button">TAR</a></li>
-          </ul>
-        </div>
-      </div><!-- end banner -->
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/govaniso/Html-select/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/govaniso/Html-select/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
 
-    <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
-      <section>
-        <p>...</p>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>Este plugins para jQuery permite la manipulación del componente HTML select, el cual nos ahorrara mucho trabajo en algunas tareas muy tediosas, inicial cuanta con las siguientes características:</p>
 
-<h3>Welcome to GitHub Pages.</h3>
+<ul>
+<li>Seleccionar una opcion</li>
+<li>Eliminar una opción</li>
+<li>Cargar opciones enviando un objeto JSON</li>
+<li>Cargar opciones pasando la URL de donde obtendrá el formato JSON </li>
+</ul><p>Queda pendiente</p>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<ul>
+<li>Cargar las opciones mediante un array</li>
+<li>Cargar opciones (Json y array) y en el la misma función indicar cual se seleccionar por default.
+En esta misma semana queda, no se preocupen.</li>
+</ul><h2>Seleccionando una opción de nuestro select</h2>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<p>con la función $.select.setValue(idSelect, value) podemos seleccionar una opcion de un select, unida mente enviado el id y el valor del value que queremos seleccionar.</p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Nuestro JS
+<code>$.select.setValue("idSelect", "febrero);</code></p>
 
-<h3>Designer Templates</h3>
+<p>Nuestro HTML</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p><code>&lt;select id="idSelect" name="nameSalect"&gt;</code></p>
 
-<h3>Rather Drive Stick?</h3>
+<p><code>&lt;option value="enero"&gt;Enero&lt;/option&gt;</code></p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p><code>&lt;option value="febrero"&gt;Febrero&lt;/option&gt;</code></p>
 
-<h3>Authors and Contributors</h3>
+<p><code>&lt;option value="marzo"&gt;Marzo&lt;/option&gt;</code></p>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p><code>&lt;/select&gt;</code></p>
 
-<h3>Support or Contact</h3>
+<h2>Remover una opción de nuestro select</h2>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>Los parámetros enviados son iguales que $.select.setValue, pero con la diferencia que selera eliminada la opción que su value coincida el el parámetro enviado.
+$.select.removeOption(idSelect, value)</p>
+
+<h2>$.select.loadDataJsonAjax()</h2>
+
+<p>Carga los datos de un objeto Jsonen el combo
+$.select.loadDataJsonAjax("idSelect", url);</p>
+
+<p>Nuestro codigo JS
+<code>$.select.loadDataJsonAjax("idSelect",'http://soyprogramador.liz.mx/getDatosJson/');</code></p>
+
+<p>Nuestro código HTML:
+<code>&lt;select id="idSelect" name="nameSalect"&gt;&lt;/select&gt;</code></p>
+
+<p>Ejemplo del JSON obtenido desde una URL</p>
+
+<p><code>[{"value":"1","text":"Liderazgo"},{"value":"2","text":"Recursos Humanos"},{"value":"3","text":"Marketing"},{"value":"4","text":"Idiomas"}]</code></p>
+
+<h2>$.select.loadDataJson</h2>
+
+<p>$.select.loadDataJson("idSelect", json);</p>
+
+<p>Funciona de manera similar que el anterior solo que los datos en formato <strong>JSON</strong>son pasados como parámetro.</p>
+
+<p>Por cortesia de <a href="http://soyprogramador.liz.mx">soyprogramador.liz.mx</a></p>
       </section>
-      <footer>
-        <p>Project maintained by <a href="https://github.com/govaniso">govaniso</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Html-select maintained by <a href="https://github.com/govaniso">govaniso</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
     
+
   </body>
 </html>
