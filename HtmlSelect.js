@@ -14,7 +14,7 @@
 
 (function($) {
 	$.select = {
-		/*
+		/**
 		*	setValue()
 		*	@param idSelect Id del select
 		*	@param value valor a mostrar del select
@@ -27,12 +27,12 @@
 				SelectObject = document.getElementById(idSelect);
 				for(index = 0;  index < SelectObject.length;  index++) {
 					if(SelectObject[index].value == value){
-						SelectObject.selectedIndex = index;
+						SelectObject.selectedIndex = index;						
 						break;
 					}
-				}
+				}			
 			},
-		/*
+		/**
 		*	removeOption()
 		*	@param idSelect Id del select
 		*	@param value valor de la opción a eliminar del select
@@ -51,46 +51,66 @@
 					}
 				}
 			},
-		/*
-		*	loadDataJson()
+			
+		/**
+		*	addOption()
 		*	@param idSelect Id del select
-		*	@param json Obejto json en formato value, text
-		*	@param limpiar Por debault Antes de cargar los valores, elimina cualquier opcion del combo
+		*	@param value valor de la opción a agregar
 		*	
-		*	Carga los datos de un objeto Jsonen el combo.		
+		*	Agrega una opción a un select
 		*
-		*	$.select.loadDataJson("idSelect", json);
+		*	$.select.addOption("idSelect","valueDos");
 		*
 		*/
-		loadDataJson: function(idSelect, json){
-			$("#"+idSelect).html("");
-			for (var i=0, len = json.length; i<len ; i++) {
-					var entry = json[i];				
-					//console.warn(entry.);
-					$('#'+idSelect).append("<option value='"+entry.value+"'>"+entry.text+"</option>");  
-				}
-        },
-		/*
-		*	loadDataJson()
-		*	@param idSelect Id del select
-		*	@param json Obejto json en formato value, text
-		*	@param limpiar Por debault Antes de cargar los valores, elimina cualquier opcion del combo
-		*	
-		*	Carga los datos de un objeto Jsonen el combo.		
-		*
-		*	$.select.loadDataJson("idSelect", json);
-		*
-		*/
-		loadDataJson: function(idSelect, json){
-			$("#"+idSelect).html("");
-			for (var i=0, len = json.length; i<len ; i++) {
-					var entry = json[i];				
-					//console.warn(entry.);
-					$('#'+idSelect).append("<option value='"+entry.value+"'>"+entry.text+"</option>");  
-				}
-        },
+		addOption: function(idSelect, value,text) {	
+				SelectObject = document.getElementById(idSelect);
+				$('#'+idSelect).append("<option value='"+value+"'>"+text+"</option>");  
+			},
 		
-		/*
+		/**
+		*	loadDataJson()
+		*	@param idSelect Id del select
+		*	@param json Obejto json en formato value, text
+		*	@param limpiar Por debault Antes de cargar los valores, elimina cualquier opcion del combo
+		*	
+		*	Carga los datos de un objeto Jsonen el combo.		
+		*
+		*	$.select.loadDataJson("idSelect", json);
+		*
+		*/
+		loadDataJson: function(idSelect, json, dafaultValue){
+			$("#"+idSelect).html("");
+			for (var i=0, len = json.length; i<len ; i++) {
+					var entry = json[i];				
+					//console.warn(entry.);
+					$('#'+idSelect).append("<option value='"+entry.value+"'>"+entry.text+"</option>");  
+				}
+			if(dafaultValue != undefined){
+				$.select.setValue(idSelect, dafaultValue);
+			}
+        },
+/**
+		*	loadDataJsonSetValue()
+		*	@param idSelect Id del select
+		*	@param json Obejto json en formato value, text
+		*	@param limpiar Por debault Antes de cargar los valores, elimina cualquier opcion del combo
+		*	
+		*	Carga los datos de un objeto Jsonen el combo.		
+		*
+		*	$.select.loadDataJson("idSelect", json);
+		*
+		*/
+		loadDataJsonSetValue: function(idSelect, json, value){
+			$("#"+idSelect).html("");
+			for (var i=0, len = json.length; i<len ; i++) {
+					var entry = json[i];				
+					//console.warn(entry.);
+					$('#'+idSelect).append("<option value='"+entry.value+"'>"+entry.text+"</option>");  
+				}
+			$.select.setValue(idSelect, value);
+        },		
+		
+		/**
 		*	loadDataJsonAjax()
 		*	@param idSelect Id del select
 		*	@param url URL de donde obtendremos el Obejto json en formato value, text|
@@ -101,7 +121,7 @@
 		*	$.select.loadDataJsonAjax("idSelect", url);
 		*
 		*/
-		loadDataJsonAjax: function(idSelect, url){
+		loadDataJsonAjax: function(idSelect, url, dafaultValue){
 				$("#"+idSelect).html("");
 			$.ajax({
                 url:  url,
@@ -110,9 +130,40 @@
                         var entry = json[i];
                         $('#'+idSelect).append("<option value='"+entry.value+"'>"+entry.text+"</option>");
                     }
+					
+					if(dafaultValue != undefined){
+						$.select.setValue(idSelect, dafaultValue);
+					}
                     
                 }
             });
+
+        },
+		/**
+		*	loadDataJsonAjax()
+		*	@param idSelect Id del select
+		*	@param url URL de donde obtendremos el Obejto json en formato value, text|
+		*	@param value Por debault el cual debera estar seleccionado
+		*	
+		*	Carga los datos de un objeto Json obtenidos desde una URL en el combo.		
+		*   A diferencial del anterior setea el un valor al combo.
+		*
+		*	$.select.loadDataJsonAjax("idSelect", url);
+		*
+		*/
+		loadDataJsonAjaxSetValue: function(idSelect, url, value){
+			$("#"+idSelect).html("");
+			$.ajax({
+                url:  url,
+                success: function(json) {
+					for (var i=0, len = json.length; i < len ; i++) {
+                        var entry = json[i]; 
+                        $('#'+idSelect).append("<option value='"+entry.value+"'>"+entry.text+"</option>");
+                    }
+					$.select.setValue(idSelect, value);
+                }
+            });
+			
 
         }
 	
