@@ -14,7 +14,7 @@
 
 (function($) {
 	$.select = {
-		/*
+		/**
 		*	setValue()
 		*	@param idSelect Id del select
 		*	@param value valor a mostrar del select
@@ -32,7 +32,7 @@
 					}
 				}			
 			},
-		/*
+		/**
 		*	removeOption()
 		*	@param idSelect Id del select
 		*	@param value valor de la opción a eliminar del select
@@ -51,8 +51,23 @@
 					}
 				}
 			},
+			
+		/**
+		*	addOption()
+		*	@param idSelect Id del select
+		*	@param value valor de la opción a agregar
+		*	
+		*	Agrega una opción a un select
+		*
+		*	$.select.addOption("idSelect","valueDos");
+		*
+		*/
+		addOption: function(idSelect, value,text) {	
+				SelectObject = document.getElementById(idSelect);
+				$('#'+idSelect).append("<option value='"+value+"'>"+text+"</option>");  
+			},
 		
-		/*
+		/**
 		*	loadDataJson()
 		*	@param idSelect Id del select
 		*	@param json Obejto json en formato value, text
@@ -74,7 +89,7 @@
 				$.select.setValue(idSelect, dafaultValue);
 			}
         },
-/*
+/**
 		*	loadDataJsonSetValue()
 		*	@param idSelect Id del select
 		*	@param json Obejto json en formato value, text
@@ -95,7 +110,7 @@
 			$.select.setValue(idSelect, value);
         },		
 		
-		/*
+		/**
 		*	loadDataJsonAjax()
 		*	@param idSelect Id del select
 		*	@param url URL de donde obtendremos el Obejto json en formato value, text|
@@ -124,7 +139,7 @@
             });
 
         },
-		/*
+		/**
 		*	loadDataJsonAjax()
 		*	@param idSelect Id del select
 		*	@param url URL de donde obtendremos el Obejto json en formato value, text|

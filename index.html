@@ -5,9 +5,10 @@
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="Html-select : Plugin para la Manipulación del componente HTML Select" />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
+	<script src="javascripts/HtmlSelect.js"></script>
     <title>Html-select</title>
   </head>
 
@@ -19,89 +20,186 @@
           <a id="forkme_banner" href="https://github.com/govaniso/Html-select">View on GitHub</a>
 
           <h1 id="project_title">Html-select</h1>
-          <h2 id="project_tagline">Plugin para la Manipulación del componente HTML Select</h2>
+          <h2 id="project_tagline">Plugin para la Manipulación del componente  Select HTML</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/govaniso/Html-select/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/govaniso/Html-select/tarball/master">Download this project as a tar.gz file</a>
-            </section>
+              <a class="tar_download_link" href="https://github.com/govaniso/Html-select/tarball/master">Download this project as a tar.gz file</a>            </section>
         </header>
     </div>
 
     <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p>Este plugins para jQuery permite la manipulación del componente HTML select, el cual nos ahorrara mucho trabajo en algunas tareas muy tediosas, inicial cuanta con las siguientes características:</p>
+  <div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+      <p>Este plugin para jQuery permite la manipulación del componente HTML select, el cual nos ahorrara mucho trabajo en algunas tareas muy tediosas,cuenta con las siguientes características:</p>
 
-<ul>
+        <ul>
 <li>Seleccionar una opción</li>
 <li>Eliminar una opción</li>
-<li>Cargar opciones enviando un objeto JSON</li>
-<li>Cargar opciones pasando la URL de donde obtendrá el formato JSON </li>
-</ul><p>Queda pendiente</p>
+<li>Cargar opciones enviando un objeto JSON y opcional mente indicamos cual estara selecciondo </li>
+<li>Cargar opciones pasando la URL de donde obtendrá el formato JSON 
+  y podemos indicar que valor se seleccionara por default  </li>
+<li></li>
+      <li>  Miremos algunos ejemplos sobre su uso, con un <a href="http://govaniso.github.com/Html-select/estados.json" target="_blank">objeto json</a> el cual contendra la lista de los estados de Mexíco. </li>
+      </ul>
+      <h3>$.select.loadDataJsonAjax()</h3>
+          <p>Este metodo carga los datos onbtenidos desde  un objeto json al componente select. </p>
+          <p>Parametros</p>
+          <ul>
+            <li><strong>idSelect</strong>: Id del compomemte select donde se cargaran los datos .</li>
+            <li><strong>url</strong>: URL del cual se obtendra el objeto json, o bien la ruta del archivo como en nuestro ejemplo</li>
+            <li><strong>dafaultValue</strong>: Valor opcional, en caso de que necesitemos que se seleccione un valor por default, por ejemplo cuando estamos editando.  </li>
+          </ul>
+          Nuestro  código html y JS, para cargar los estados y seleccionar por default el estado número 22.
+          <pre> &lt;select id=&quot;estados&quot;&gt;&lt;/select&gt;
+ &lt;script&gt;<br>	$url = &quot;estados.json&quot;;<br>	$.select.loadDataJsonAjax(&quot;estados&quot;,$url,22);<br>  &lt;/script&gt;</pre>
+		  
+          <h4><strong>El resultado </strong></h4>
+          <p>
+            <select id="estados">
+            </select>
+			  <script>
+			$url = "estados.json";
+			$.select.loadDataJsonAjax("estados",$url,22);
+		  </script>
+      </p>
+        </p>
+		 <h3>$.select.loadDataJson</h3>
+            <p>Funciona de manera similar que el anterior solo que los datos en formato <strong>JSON</strong>son pasados como parámetro.</p>
+            <p>Parametros</p>
+            <ul>
+              <li><strong>idSelect</strong>: Id del compomemte select donde se cargaran los datos .</li>
+              <li><strong>json</strong>: Objeto json con los valores a cargar en el componente select </li>
+              <li><strong>dafaultValue</strong>: Valor opcional, en caso de que necesitemos que se seleccione un valor por default, por ejemplo cuando estamos editando. </li>
+            </ul>
+            <p>Nuestro  código html y JS en estecaso no vamos a seleccionar ningun valor por default.		   </p>
+           
+		   <pre>&lt;select id=&quot;estadosJson&quot;&gt;&lt;/select&gt;		<br>		&lt;script&gt;<br>		var objetoJson = [{&quot;value&quot;:&quot;1&quot;,&quot;text&quot;:&quot;Aguascalientes&quot;},{&quot;value&quot;:&quot;2&quot;,&quot;text&quot;:&quot;Baja California&quot;},{&quot;value&quot;:&quot;3&quot;,&quot;text&quot;:&quot;Baja California Sur&quot;},{&quot;value&quot;:&quot;4&quot;,&quot;text&quot;:&quot;Campeche&quot;},{&quot;value&quot;:&quot;5&quot;,&quot;text&quot;:&quot;Coahuila&quot;},{&quot;value&quot;:&quot;6&quot;,&quot;text&quot;:&quot;Chihuahua&quot;},{&quot;value&quot;:&quot;7&quot;,&quot;text&quot;:&quot;Chiapas&quot;},{&quot;value&quot;:&quot;8&quot;,&quot;text&quot;:&quot;Colima&quot;}];		<br>		$.select.loadDataJson(&quot;estadosJson&quot;,objetoJson);<br>		&lt;/scipt&gt;
+		   </pre>
+        
+	    <h4>Resultado</h4>
+		   <p>
+		     <select id="estadosJson">
+             </select>		
+		        <script>
+		</script>
+		        <br>
+      </p>
+		   <h3>Seleccionando una opción de nuestro select</h3>
+		   <p>Con la función $.select.setValue(idSelect, value) podemos seleccionar una opcion de un select, enviado el id y el valor del value que queremos seleccionar.</p>
+		   <p>Nuestro JS <pre>$.select.setValue("estados", 18);</pre></p>
+		   
+		   <h3>Remover una opción de nuestro select</h3>
+		   <p>Los parámetros enviados son iguales que $.select.setValue, pero con la diferencia que se eliminara la opción donde su value coincida con el parámetro enviado.</p>
+		   <p>Nuestro JS </p>
+		   <pre>$.select.removeOption("estados", 18);</pre>
+		   </p>
+<p>&nbsp;</p>
+<h3>Agregar  una opción a nuestro select</h3>
+<p>Nuestro JS </p>
+<pre>$.select.dOption("estados", 33, &quot;Nuevo estado&quot;);</pre>
+</p>
+<p></p>
+<p>&nbsp;</p>
+<h1>Test
+  <script>var objetoJson = [{"value":"1","text":"Aguascalientes"},{"value":"2","text":"Baja California"},{"value":"3","text":"Baja California Sur"},{"value":"4","text":"Campeche"},{"value":"5","text":"Coahuila"},{"value":"6","text":"Chihuahua"},{"value":"7","text":"Chiapas"},{"value":"8","text":"Colima"}];		
+		$.select.loadDataJson("estadosJson",objetoJson);
+		        </script>
+      </h1>
+<p>&nbsp;</p>
+<table width="766" border="0" cellpadding="0" cellspacing="0">
+  
+  <tr>
+    <td width="116" rowspan="2" align="right">Estados:
+      <label></label></td>
+    <td width="154" rowspan="2"><select name="estadosSelect" id="estadosSelect">
+        </select></td>
+    <td width="71" rowspan="2" align="right">&nbsp;</td>
+    <td width="217" rowspan="2"><label>
+      Value:
+        <input name="value" type="text" id="valueSelect" size="10">
+    </label></td>
+    <td width="206"><label>
+      <input name="seleccionar" onClick="seleccionar()" type="button" id="seleccionar" value="Seleccionar">
+    </label></td>
+  </tr>
+  <tr>
+    <td><input name="eliminar" type="button" onClick="remover()" id="eliminar" value="Eliminar"></td>
+  </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td align="right">Agregar</td>
+    <td nowrap><p>Value:
+      <input name="valueAdd" type="text" id="valueAdd" size="10">
+    </p>
+      <p>Texto:  
+        <input name="textAdd" type="text" id="textAdd" size="20">
+      </p></td>
+    <td><input name="agregar" onClick="add()" type="button" id="agregar" value="Agregar"></td>
+  </tr>
+</table>
+<script>
+	$url = "estados.json";
+	$.select.loadDataJsonAjax("estadosSelect",$url,22);	
+	function seleccionar(){
+		$.select.setValue("estadosSelect",$("#valueSelect").val());
+	}
+	function remover(){
+		$.select.removeOption("estadosSelect",$("#valueSelect").val());
+	}
+	
+	function add(){
+		$.select.addOption("estadosSelect",$("#valueAdd").val(),$("#textAdd").val());
+		$.select.setValue("estadosSelect",$("#valueAdd").val());
+	}
+  </script>
+  
+  <pre>&lt;script&gt;<br>	$url = &quot;estados.json&quot;;<br>	$.select.loadDataJsonAjax(&quot;estadosSelect&quot;,$url,22);	<br>	function seleccionar(){<br>		$.select.setValue(&quot;estadosSelect&quot;,$(&quot;#valueSelect&quot;).val());<br>	}<br>	function remover(){<br>		$.select.removeOption(&quot;estadosSelect&quot;,$(&quot;#valueSelect&quot;).val());<br>	}
+	function add(){<br>		$.select.addOption(&quot;estadosSelect&quot;,$(&quot;#valueAdd&quot;).val(),$(&quot;#textAdd&quot;).val());<br>		$.select.setValue(&quot;estadosSelect&quot;,$(&quot;#valueAdd&quot;).val());<br>	}<br>  &lt;/script&gt;
+  </pre>
+<p>&nbsp;</p>
 
-<ul>
-<li>Cargar las opciones mediante un array</li>
-<li>Cargar opciones (Json y array) y en el la misma función indicar cual se seleccionar por default.
-En esta misma semana queda, no se preocupen.</li>
-</ul><h2>Seleccionando una opción de nuestro select</h2>
-
-<p>con la función $.select.setValue(idSelect, value) podemos seleccionar una opcion de un select, unida mente enviado el id y el valor del value que queremos seleccionar.</p>
-
-<p>Nuestro JS
-<code>$.select.setValue("idSelect", "febrero);</code></p>
-
-<p>Nuestro HTML</p>
-
-<p><code>&lt;select id="idSelect" name="nameSalect"&gt;</code></p>
-
-<p><code>&lt;option value="enero"&gt;Enero&lt;/option&gt;</code></p>
-
-<p><code>&lt;option value="febrero"&gt;Febrero&lt;/option&gt;</code></p>
-
-<p><code>&lt;option value="marzo"&gt;Marzo&lt;/option&gt;</code></p>
-
-<p><code>&lt;/select&gt;</code></p>
-
-<h2>Remover una opción de nuestro select</h2>
-
-<p>Los parámetros enviados son iguales que $.select.setValue, pero con la diferencia que se eliminara la opción done su value coincida con el parámetro enviado.
-$.select.removeOption(idSelect, value)</p>
-
-<h2>$.select.loadDataJsonAjax()</h2>
-
-<p>Carga los datos de un objeto Jsonen el combo
-$.select.loadDataJsonAjax("idSelect", url);</p>
-
-<p>Nuestro codigo JS
-<code>$.select.loadDataJsonAjax("idSelect",'http://soyprogramador.liz.mx/getDatosJson/');</code></p>
-
-<p>Nuestro código HTML:
-<code>&lt;select id="idSelect" name="nameSalect"&gt;&lt;/select&gt;</code></p>
-
-<p>Ejemplo del JSON obtenido desde una URL</p>
-
-<p><code>[{"value":"1","text":"Liderazgo"},{"value":"2","text":"Recursos Humanos"},{"value":"3","text":"Marketing"},{"value":"4","text":"Idiomas"}]</code></p>
-
-<h2>$.select.loadDataJson</h2>
-
-<p>$.select.loadDataJson("idSelect", json);</p>
-
-<p>Funciona de manera similar que el anterior solo que los datos en formato <strong>JSON</strong>son pasados como parámetro.</p>
-
-<p>Por cortesia de <a href="http://soyprogramador.liz.mx">soyprogramador.liz.mx</a></p>
-      </section>
+<div id="disqus_thread" class="inner"></div>
+    </section>
     </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Html-select maintained by <a href="https://github.com/govaniso">govaniso</a> & <a href="https://soyprogramador.liz.mx">soyprogramador.liz.mx</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
+
 
     
+	
+	
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'htmlselect'; // required: replace example with your forum shortname
 
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        
+<hr>
+    <!-- FOOTER  -->
+  <div id="footer_wrap" class="outer">
+	<footer class="inner">
+	  <p class="copyright">Html-select mantenido por <a href="https://github.com/govaniso">govaniso</a> & <a href="https://soyprogramador.liz.mx">soyprogramador.liz.mx</a></p>
+      </footer>
+    </div>
+	
+	<!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://pwk.liz.mx/" : "http://pwk.liz.mx/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 6);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://pwk.liz.mx/piwik.php?idsite=6" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
   </body>
 </html>
