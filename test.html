@@ -1,0 +1,21 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Bootstrap 101 Template</title>
+    <!-- Bootstrap -->
+    <link href="http://gumbyframework.com/css/imports.css" rel="stylesheet" media="screen">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="javascripts/HtmlSelect.js"></script>
+    </head>
+    <body>
+		<div class="container row">
+		<h1>Hello, world!</h1>
+		
+		<select id="estados"></select>
+		<script>
+			$url = "http://localhost:81/ytv/services/espacioWeb/getEstadosJson";
+			$.select.loadDataJsonAjax("estados",$url,22);
+		</script>
+		</div>
+    </body>
+    </html>
