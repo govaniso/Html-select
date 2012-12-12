@@ -1,5 +1,6 @@
 /**
  * http://soyprogramador.liz.mx
+ * http://govaniso.github.com/Html-select/
  *
  *
  * Plugin para jQuery Que permite la manipulación del componente Select de HTML
